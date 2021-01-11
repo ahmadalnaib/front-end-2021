@@ -57,6 +57,7 @@ function loadData()
       let output='';
       if(response.type === 'success')
       {
+        // callback
         response.forEach(function(user){
         output +=
         `<p>${user.id}</p>`
@@ -67,7 +68,7 @@ function loadData()
       }
       
       document.getElementById('data').innerHTML=output
-    }
+    }  
   }
   xhr.send();
 }
