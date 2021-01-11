@@ -1,6 +1,6 @@
 <template>
   <h1>Game vue</h1>
-  <button @click="start">play</button>
+  <button @click="start" :disabled="isPlaying">play</button>
   <block v-if="isPlaying" :delay="delay"/>
 </template>
 
