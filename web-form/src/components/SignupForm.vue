@@ -11,33 +11,26 @@
       <option selected value="developer">developer</option>
       <option value="designer">designer</option>
     </select>
+    <label>Skills</label>
+    
+    <input type="text" v-model="tempSkill" @keyup="addSkill">
+    <div v-for="skill in skills" :key="skill" class="pill">
+    <span @click="deleteSkill(skill)">{{skill}}</span>
+    </div>
 
     <div class="terms">
       <input type="checkbox" required v-model="terms">
       <label>Accept terms and condition</label> 
     </div>
 
-    <div>
-      <input type="checkbox" value="ahmed" v-model="names">
-      <label for="">ahmed</label>
-    </div>
-     <div>
-      <input type="checkbox" value="ato" v-model="names">
-      <label for="">ato</label>
-    </div>
-     <div>
-      <input type="checkbox" value="vieri" v-model="names">
-      <label for="">vieri</label>
-    </div>
+   
   </form>
 
   <p> EMAIL: {{email}}</p>
   <p>Password: {{password}}</p>
   <p>Role: {{role}}</p>
   <p>Terms: {{terms}}</p>
-  <ul>
-    <li>{{names}}</li>
-  </ul>
+ 
 </template>
 
 <script>
@@ -48,9 +41,28 @@ data(){
  password:'',
  role:'',
  terms:false,
- names:[],
+ tempSkill:'',
+ skills:[],
 
 
+  }
+},
+methods:{
+  addSkill(e){
+       if(e.key===',' && this.tempSkill)
+       {
+         if(!this.skills.includes(this.tempSkill)){
+             
+           this.skills.push(this.tempSkill)
+         }
+         this.tempSkill=''
+       }
+  },
+  deleteSkill(skill)
+  {
+    this.skills=this.skills.filter((item)=>{
+        return skill !==item
+    })
   }
 }
 }
@@ -98,5 +110,19 @@ input[type="checkbox"]
   margin: 0 10px 0 0;
   position: relative;
   top: 2px;
+}
+
+
+.pill {
+  display: inline-block;
+  margin:  20px 10px 0 0;
+  padding: 6px 12px;
+  background: #eee;
+  border-radius:20px ;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: #777;
+  cursor: pointer;
 }
 </style>
